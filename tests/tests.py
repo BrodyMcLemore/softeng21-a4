@@ -5,7 +5,7 @@ import pytest
 name = "test"
 proj = Project(name)
 task = "test task"
-fn = name + ".txt"
+fn = "../.projects/" + name + ".txt"
 
 def test_add():
     proj.add_task(task)
@@ -13,21 +13,20 @@ def test_add():
         assert f.read() == task
 
 def test_fail_add():
-    with pytest.raise(Exception):
+    with pytest.raises(Exception):
         proj.add_task(task)
 
 def test_show():
     ret = proj.get_tasks()
-    assert ret == task
+    assert ret[0] == task
 
 def test_remove():
     proj.remove_task(task)
-    fileN =  name + ".txt"
-    with open(fileN, 'r') as f:
+    with open(fn, 'r') as f:
         assert f.read() != task
 
 def test_fail_remove():
-    with pytest.raise(Exception):
+    with pytest.raises(Exception):
         proj.remove_task(task)
 
 '''
