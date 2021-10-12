@@ -5,12 +5,12 @@ import pytest
 name = "test"
 proj = Project(name)
 task = "test task"
-fn = "../.projects/" + name + ".txt"
+fn = "./.projects/" + name + ".txt"
 
 def test_add():
     proj.add_task(task)
     with open(fn, 'r') as f:
-        assert f.read() == task
+        assert f.read() == task + "\n"
 
 def test_fail_add():
     with pytest.raises(Exception):
